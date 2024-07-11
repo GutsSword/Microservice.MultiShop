@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35004.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{5764C61F-BFD8-4FDB-A87E-CC8FE7E70D54}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catolog", "Catolog", "{14D86443-E085-4C1D-88AE-0725F921623B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiShop.Catolog", "Services\Catolog\MultiShop.Catolog\MultiShop.Catolog.csproj", "{DBD348A5-0E80-448F-978D-6B6D71D45FF8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DBD348A5-0E80-448F-978D-6B6D71D45FF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBD348A5-0E80-448F-978D-6B6D71D45FF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBD348A5-0E80-448F-978D-6B6D71D45FF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBD348A5-0E80-448F-978D-6B6D71D45FF8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{14D86443-E085-4C1D-88AE-0725F921623B} = {5764C61F-BFD8-4FDB-A87E-CC8FE7E70D54}
+		{DBD348A5-0E80-448F-978D-6B6D71D45FF8} = {14D86443-E085-4C1D-88AE-0725F921623B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {126D6516-2AD2-48AF-8AB6-312EDB78DBC5}
+	EndGlobalSection
+EndGlobal
