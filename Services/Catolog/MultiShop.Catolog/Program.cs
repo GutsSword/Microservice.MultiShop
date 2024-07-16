@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using MultiShop.Catolog.AutoMapper;
 using MultiShop.Catolog.Services.CategoryServices;
@@ -15,6 +16,12 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductDetailService, ProductDetailService>();
 builder.Services.AddScoped<IProductImagesService, ProductImagesService>();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+{
+    opt.Authority = builder.Configuration["IdentityServerUrl"];
+    opt.Audience = "ResourceCatolog";
+    opt.RequireHttpsMetadata = false;
+});
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
@@ -39,6 +46,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

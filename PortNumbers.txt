@@ -1,0 +1,6 @@
+IdentityServer = 5001
+Catolog Service = 7070
+Discount Service = 7071
+Order Service = 7072
+Cargo Service = 7073
+Basket Service = 7074
