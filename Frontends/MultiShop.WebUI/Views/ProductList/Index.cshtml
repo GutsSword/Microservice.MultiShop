@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/UILayout/_UILayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-12">
+            <nav class="breadcrumb bg-light mb-30">
+                <a class="breadcrumb-item text-dark" href="#">Ana Sayfa</a>
+                <a class="breadcrumb-item text-dark" href="#">Alışveriş</a>
+                <span class="breadcrumb-item active">Ürün Listesi</span>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <!-- Shop Sidebar Start -->
+        <div class="col-lg-3 col-md-4">
+            <!-- Price Start -->
+            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Fiyata Göre Listele</span></h5>
+            @await Component.InvokeAsync("_ProductListPriceFilterComponentPartial")
+            <!-- Price End -->
+            <!-- Color Start -->
+            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Renge Göre Listele</span></h5>
+            @await Component.InvokeAsync("_ProductListColorByFilterComponentPartial")
+            <!-- Color End -->
+            <!-- Size Start -->
+            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Ebata Göre Listele</span></h5>
+            @await Component.InvokeAsync("_ProductListFilterBySizeComponentPartial")
+            <!-- Size End -->
+        </div>
+        <!-- Shop Sidebar End -->
+        <!-- Shop Product Start -->
+        <div class="col-lg-9 col-md-8">
+            <div class="row pb-3">
+                @await Component.InvokeAsync("_ProductListSortingViewComponentPartial")
+
+                @await Component.InvokeAsync("_ProductListComponentPartial")
+
+                @await Component.InvokeAsync("_ProductListPaginationComponentPartial")
+     
+            </div>
+        </div>
+        <!-- Shop Product End -->
+    </div>
+</div>
+

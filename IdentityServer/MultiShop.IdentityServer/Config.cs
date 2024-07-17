@@ -30,6 +30,10 @@ namespace MultiShop.IdentityServer
            {
                Scopes = {"CargoFullPermission"}
            },
+           new ApiResource("ResourceBasket")
+           {
+               Scopes = {"BasketFullPermission"}
+           },
            new ApiResource(IdentityServerConstants.LocalApi.ScopeName) 
         };
 
@@ -47,6 +51,7 @@ namespace MultiShop.IdentityServer
             new ApiScope("DiscoundFullPermission","Full Authority for Discount Operations"),
             new ApiScope("OrderFullPermission","Full Authority for Discount Operations"),
             new ApiScope("CargoFullPermission","Full Authority for Cargo Operations"),
+            new ApiScope("BasketFullPermission","Full Authority for Basket Operations"),
             new ApiScope(IdentityServerConstants.LocalApi.ScopeName),
         };
 
@@ -68,7 +73,7 @@ namespace MultiShop.IdentityServer
             {
                 ClientId = "MultiShopManagerId",
                 ClientName = "MultiShop Manager User",
-                AllowedGrantTypes= GrantTypes.ClientCredentials,
+                AllowedGrantTypes= GrantTypes.ResourceOwnerPassword,
                 ClientSecrets = {new Secret("multishopsecret".Sha256())},
                 AllowedScopes = { "CatologFullPermission" }
             },
@@ -77,7 +82,7 @@ namespace MultiShop.IdentityServer
             {
                 ClientId = "MultiShopAdminId",
                 ClientName = "MultiShop Admin User",
-                AllowedGrantTypes= GrantTypes.ClientCredentials,
+                AllowedGrantTypes= GrantTypes.ResourceOwnerPassword,
                 ClientSecrets = {new Secret("multishopsecret".Sha256())},
                 AllowedScopes = { 
                     "CatologFullPermission", 
@@ -85,12 +90,13 @@ namespace MultiShop.IdentityServer
                     "DiscoundFullPermission",
                     "OrderFullPermission",
                     "CargoFullPermission",
+                    "BasketFullPermission",
                     IdentityServerConstants.LocalApi.ScopeName,
                     IdentityServerConstants.StandardScopes.Email,
                     IdentityServerConstants.StandardScopes.Email,
                     IdentityServerConstants.StandardScopes.Profile,
                 },
-                AccessTokenLifetime=300
+                AccessTokenLifetime=600
             },
         };
     }
