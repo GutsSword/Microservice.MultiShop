@@ -1,18 +1,16 @@
-﻿<div class="col-lg-4">
-    <div class="product-offer mb-30" style="height: 200px;">
-        <img class="img-fluid" src="https://www.shutterstock.com/image-vector/3d-illustration-sale-banner-on-600nw-1840688533.jpg" alt="">
-        <div class="offer-text">
-            <h6 class="text-white text-uppercase">20% İndirim</h6>
-            <h3 class="text-white mb-3">Özel Teklif</h3>
-            <a href="" class="btn btn-primary">Satın Al</a>
+﻿@model List<ResultSpecialOfferDto>
+
+
+<div class="col-lg-4">
+    @foreach (var item in Model)
+    {
+        <div class="product-offer mb-30" style="height: 200px;">
+            <img class="img-fluid" src="@item.ImageUrl" alt="">
+            <div class="offer-text">
+                <h6 class="text-white text-uppercase" style="text-align:center" >@item.Title</h6>
+                <h3 class="text-white mb-3" style="text-align:center">@item.SubTitle</h3>
+                <a href="" class="btn btn-primary">İncele</a>
+            </div>
         </div>
-    </div>
-    <div class="product-offer mb-30" style="height: 200px;">
-        <img class="img-fluid" src="https://cdn4.vectorstock.com/i/1000x1000/04/28/big-sale-promotion-ecommerce-banner-with-people-vector-35150428.jpg" alt="">
-        <div class="offer-text">
-            <h6 class="text-white text-uppercase">50% İndirim</h6>
-            <h3 class="text-white mb-3">Özel Teklif</h3>
-            <a href="" class="btn btn-primary">Satın Al</a>
-        </div>
-    </div>
+    }
 </div>

@@ -1,15 +1,18 @@
 ﻿using AutoMapper;
+using MongoDB.Bson;
 using MongoDB.Driver;
-using MultiShop.Catolog.Dtos.CategoryDtos;
 using MultiShop.Catolog.Dtos.ProductDtos;
 using MultiShop.Catolog.Entities;
 using MultiShop.Catolog.Settings;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace MultiShop.Catolog.Services.ProductServices
 {
     public class ProductService : IProductService
     {
         private readonly IMongoCollection<Product> productCollection;
+        private readonly IMongoCollection<Category> categoryCollection;
+        private readonly IMongoCollection<ProductImage> productImageCollection;
         private readonly IDatabaseSettings databaseSettings;
         private readonly IMapper mapper;
 
@@ -18,19 +21,42 @@ namespace MultiShop.Catolog.Services.ProductServices
             var client = new MongoClient(databaseSettings.ConnectionString);
             var database = client.GetDatabase(databaseSettings.DatabaseName);
             productCollection = database.GetCollection<Product>(databaseSettings.ProductCollectionName);
+            categoryCollection = database.GetCollection<Category>(databaseSettings.CategoryCollectionName);
+            productImageCollection = database.GetCollection<ProductImage>(databaseSettings.ProductImageCollectionName);
             this.mapper = mapper;
         }
 
         public async Task CreateProductAsync(CreateProductDto createProductDto)
         {
-            var value = mapper.Map<Product>(createProductDto);
-            await productCollection.InsertOneAsync(value);
+            var productId = ObjectId.GenerateNewId().ToString();
+            var createProduct = new Product
+            {
+                ProductId = productId.ToString(),
+                ProductDescription = createProductDto.ProductDescription,
+                ProductImageUrl = createProductDto.ProductImageUrl,
+                ProductPrice = createProductDto.ProductPrice,
+                CategoryId = createProductDto.CategoryId,
+                ProductName = createProductDto.ProductName,                
+            };
+            
+            if(createProduct is not null)
+                await productCollection.InsertOneAsync(createProduct);
+
+            var productImage = new ProductImage
+            {
+                ProductId = createProduct.ProductId,
+                Image1 = "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg",
+                Image2 = "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg",
+                Image3 = "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg",
+            };
+
+            await productImageCollection.InsertOneAsync(productImage);
         }
 
         public async Task DeleteProductAsync(string id)
         {
             await productCollection.DeleteOneAsync(x => x.ProductId == id);
-        }
+        } 
 
         public async Task<List<ResultProductDto>> GetAllProductAsync()
         {
@@ -48,10 +74,40 @@ namespace MultiShop.Catolog.Services.ProductServices
             return getByIdProductDto;
         }
 
+        public async Task<List<ResultProductsByCategoryDto>> GetProductListByCategoryAsync(string categoryId)
+        {
+            var values = await productCollection.Find(x => x.CategoryId == categoryId).ToListAsync();
+            foreach (var item in values)
+            {
+                item.Category = await categoryCollection.Find(x => x.CategoryId == item.CategoryId).FirstAsync();
+            }
+            var map = mapper.Map<List<ResultProductsByCategoryDto>>(values);
+
+            return map;
+        }
+
+        public async Task<List<ResultProductsWithCategoryDto>> GetProductsWithCategoryAsync()
+        {
+            var values = await productCollection.Find(x => true).ToListAsync();
+            foreach(var item in values)
+            {
+                item.Category = await categoryCollection.Find(x =>x.CategoryId == item.CategoryId).FirstAsync();
+            }
+            var map = mapper.Map<List<ResultProductsWithCategoryDto>>(values);
+
+            return map;
+        }
+
         public async Task UpdateProductAsync(UpdateProductDto updateProductDto)
         {
-            var values = mapper.Map<Product>(updateProductDto);
-            await productCollection.FindOneAndReplaceAsync(x => x.ProductId == updateProductDto.ProductId, values);
+            var values = mapper.Map<Product>(updateProductDto);            
+            var products = await productCollection.Find(x=>x.ProductId==updateProductDto.ProductId).SingleOrDefaultAsync();
+
+            if(values.ProductPrice != 0)
+            {
+                values.PreviousProductPrice = products.ProductPrice;
+                await productCollection.FindOneAndReplaceAsync(x => x.ProductId == updateProductDto.ProductId, values);
+            }
         }
     }
 }

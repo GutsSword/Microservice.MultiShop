@@ -12,7 +12,7 @@
     "MultiShop.Catolog": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": false,   // Tarayıcıyı açma özelliğini kapatır.
+      "launchBrowser": true,   // Tarayıcıyı açma özelliğini kapatır.
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:7070",
       "environmentVariables": {

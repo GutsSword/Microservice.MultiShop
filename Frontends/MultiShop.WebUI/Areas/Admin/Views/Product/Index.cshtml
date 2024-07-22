@@ -1,0 +1,58 @@
+﻿
+@model List<ProductListDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<section class="content container-fluid">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="chart-box">
+                <h4>Ürün Listesi</h4>
+                <p>
+                    Kullanımla ilgili bilgilendirme yapmak için bu alanı kullanın.
+                    <a href="/Admin/Product/CreateProduct" class="btn btn-primary" style="float:right">Ürün Ekle</a>
+                </p>
+                <br />
+                <div class="bs-example" data-example-id="bordered-table">
+                    <table class="table table-bordered">
+                        <thead>
+
+                            <tr>
+                                <th>#</th>
+                                <th>Ürün Adı</th>
+                                <th>Ürün Fiyatı</th>
+                                <th>Ürün Açıklaması</th>
+                                <th></th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <th scope="row">@item.ProductId</th>
+                                    <td>@item.ProductName</td>
+                                    <td>@item.ProductPrice</td>
+                                    <td>@item.ProductDescription</td>
+                                    <td><a href="/Admin/ProductImage/Index/@item.ProductId" class="btn btn-primary btn-sm">Ürün Detayları</a></td>
+                                    <td><a href="/Admin/Product/UpdateProduct/@item.ProductId" class="btn btn-primary btn-sm">Ürün Güncelle</a></td>
+                                    <td><a href="/Admin/Product/DeleteProduct/@item.ProductId" class="btn btn-danger btn-sm">Ürün Sil</a></td>                               
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+

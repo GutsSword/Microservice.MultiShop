@@ -7,7 +7,8 @@ using MultiShop.Catolog.Services.ProductDetailServices;
 
 namespace MultiShop.Catolog.Controllers
 {
-    [Authorize]
+    //[Authorize]
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductDetailController : ControllerBase

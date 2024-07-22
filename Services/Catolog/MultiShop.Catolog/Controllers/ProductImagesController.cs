@@ -8,7 +8,8 @@ using MultiShop.Catolog.Services.ProductImageServices;
 
 namespace MultiShop.Catolog.Controllers
 {
-    [Authorize]
+    [AllowAnonymous]
+   // [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductImagesController : ControllerBase
@@ -25,13 +26,22 @@ namespace MultiShop.Catolog.Controllers
             var values = await productImagesService.GetAllProductImageAsync();
             return Ok(values);
         }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProductImageById(string id)
         {
             var values = await productImagesService.GetByIdProductImageAsync(id);
             return Ok(values);
         }
-        [HttpPost()]
+
+        [HttpGet("GetProductImagesByProductId")]
+        public async Task<IActionResult> GetProductImagesByProductId(string id)
+        {
+            var values = await productImagesService.GetByProductIdProductImagesAsync(id);
+            return Ok(values);
+        }
+
+        [HttpPost]
         public async Task<IActionResult> CreateProductImage(CreateProductImageDto createProductImageDto)
         {
             await productImagesService.CreateProductImageAsync(createProductImageDto);

@@ -2,11 +2,13 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MultiShop.Catolog.Dtos.ProductDtos;
+using MultiShop.Catolog.Entities;
 using MultiShop.Catolog.Services.ProductServices;
 
 namespace MultiShop.Catolog.Controllers
 {
-    [Authorize]
+    [AllowAnonymous]
+   // [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
@@ -29,7 +31,8 @@ namespace MultiShop.Catolog.Controllers
             var values = await productService.GetByIdProductAsync(id);
             return Ok(values);
         }
-        [HttpPost()]
+ 
+        [HttpPost]
         public async Task<IActionResult> CreateProduct(CreateProductDto createProductDto)
         {
             await productService.CreateProductAsync(createProductDto);
@@ -46,6 +49,18 @@ namespace MultiShop.Catolog.Controllers
         {
             await productService.UpdateProductAsync(updateProductDto);
             return Ok("Ürün Başarıyla Güncellendi");
+        }
+        [HttpGet("ProductListWithCategory")]
+        public async Task<IActionResult> ProductListWithCategory()
+        {
+            var values = await productService.GetProductsWithCategoryAsync();
+            return Ok(values);
+        }
+        [HttpGet("ProductsByCategory")]
+        public async Task<IActionResult> ProductListByCategory(string categoryId)
+        {
+            var values = await productService.GetProductListByCategoryAsync(categoryId);
+            return Ok(values);
         }
     }
 }

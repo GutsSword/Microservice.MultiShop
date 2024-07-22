@@ -1,0 +1,47 @@
+﻿@using MultiShop.WebUI.Dtos.CatologDtos.ProductImagesDto
+@model ResultProductImageDto
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<section class="content container-fluid">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="chart-box">
+                <h4>Görsel Güncelle</h4>
+                <p>
+                    Kullanımla ilgili bilgilendirme yapmak için bu alanı kullanın.
+
+                </p>
+                <br />
+                <div class="bs-example" data-example-id="bordered-table">
+
+                    <form method="post">
+                        <label>Resim ID</label>
+                        <input type="text"  class="form-control" asp-for="ProductImageId" /> <br />
+                        
+                        <label>Ürün ID</label>
+                        <input type="text"  class="form-control" asp-for="ProductId" /> <br />
+
+                        <label>Resim 1 </label>
+                        <input class="form-control" type="text" asp-for="Image1" /> <br />
+
+                        <label>Resim 2 </label>
+                        <input class="form-control" type="text" asp-for="Image2" /> <br />
+                        
+                        <label>Resim 3 </label>
+                        <input class="form-control" type="text" asp-for="Image3" /> <br />
+                        
+
+                        <button class="btn btn-success">Kaydet</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
