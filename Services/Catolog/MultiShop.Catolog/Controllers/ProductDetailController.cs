@@ -31,7 +31,7 @@ namespace MultiShop.Catolog.Controllers
             var values = await ProductDetailService.GetByIdProductDetailAsync(id);
             return Ok(values);
         }
-        [HttpPost()]
+        [HttpPost]
         public async Task<IActionResult> CreateProductDetail(CreateProductDetailDto createProductDetailDto)
         {
             await ProductDetailService.CreateProductDetailAsync(createProductDetailDto);
@@ -43,11 +43,20 @@ namespace MultiShop.Catolog.Controllers
             await ProductDetailService.DeleteProductDetailAsync(id);
             return Ok("Ürün Detay Başarıyla Silindi");
         }
+
         [HttpPut]
         public async Task<IActionResult> UpdateProductDetail(UpdateProductDetailDto updateProductDetailDto)
         {
             await ProductDetailService.UpdateProductDetailAsync(updateProductDetailDto);
             return Ok("Ürün Detay Başarıyla Güncellendi");
         }
+
+        [HttpGet("GetByProductIdProductDetail")]
+        public async Task<IActionResult> GetByProductIdProductDetail(string id)
+        {
+            var values = await ProductDetailService.GetByProductIdProductDetail(id);
+            return Ok(values);
+        }
+        
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace MultiShop.Catolog.Dtos.ProductDetailDtos
+﻿using MultiShop.Catolog.Entities;
+
+namespace MultiShop.Catolog.Dtos.ProductDetailDtos
 {
     public class UpdateProductDetailDto
     {
@@ -7,5 +9,6 @@
         public string ProductInfo { get; set; }
 
         public string ProductId { get; set; }
+        //public Product Product { get; set; }
     }
 }

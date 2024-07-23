@@ -16,6 +16,7 @@ namespace MultiShop.WebUI.Dtos.CatologDtos.ProductDetailsDto
 
         public string ProductId { get; set; }
 
-        public ProductListDto Product { get; set; }
+        public ProductListDto? Product { get; set; }
+
     }
 }

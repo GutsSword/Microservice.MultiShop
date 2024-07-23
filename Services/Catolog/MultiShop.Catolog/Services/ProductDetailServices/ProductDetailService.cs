@@ -51,7 +51,15 @@ namespace MultiShop.Catolog.Services.ProductDetailServices
         {
             var map = mapper.Map<ProductDetail>(updateProductDetailDto);
             await productDetailCollection.FindOneAndReplaceAsync(x=>x.ProductDetailId 
-            == updateProductDetailDto.ProductId , map);
+            == updateProductDetailDto.ProductDetailId , map);
         }
+
+        public async Task<GetByIdProductDetailDto> GetByProductIdProductDetail(string id)
+        {
+            var values = await productDetailCollection.Find(x => x.ProductId == id).FirstOrDefaultAsync();
+            var map = mapper.Map<GetByIdProductDetailDto>(values);
+            return map;
+        }
+
     }
 }

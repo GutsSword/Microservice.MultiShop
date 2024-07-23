@@ -39,12 +39,12 @@
                 <div class="nav nav-tabs mb-4">
                     <a class="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-1">Açıklama</a>
                     <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-2">Detaylı Bilgi</a>
-                    <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-3">Yorumlar (32)</a>
+                    <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-3">Yorumlar</a>
                 </div>
                 <div class="tab-content">
-                    @await Component.InvokeAsync("_ProductDetailDescriptionFeatureViewComponentPartial")
-                    @await Component.InvokeAsync("_ProductDetailInformationFeatureViewComponentPartial")
-                    @await Component.InvokeAsync("_ProductDetailReviewsFeatureViewComponentPartial")
+                    @await Component.InvokeAsync("_ProductDetailDescriptionFeatureViewComponentPartial", new { id = ViewBag.ProductId })
+                    @await Component.InvokeAsync("_ProductDetailInformationFeatureViewComponentPartial", new { id = ViewBag.ProductId })
+                    @await Component.InvokeAsync("_ProductDetailReviewsFeatureViewComponentPartial", new { id = ViewBag.ProductId })
                 </div>
             </div>
         </div>

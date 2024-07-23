@@ -1,0 +1,47 @@
+﻿@using MultiShop.WebUI.Dtos.CatologDtos.ProductDetailsDto
+
+@model UpdateProductDetailDto
+
+@{
+    ViewData["Title"] = "UpdateProductDetail";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<section class="content container-fluid">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="chart-box">
+                <h4>Ürün Detay Güncelleme Sayfası </h4>
+
+                <div class="bs-example" data-example-id="bordered-table">
+
+                    <form method="post">
+
+                        <label>Ürün ID</label>
+                        <br />
+                        <input type="text" readonly class="form-control" asp-for="ProductId" />
+                        <br />
+
+                        <input type="hidden" readonly class="form-control" asp-for="ProductDetailId" />
+                        <br />
+
+                        <label>Ürün Açıklaması </label>
+                        <br />
+                        <textarea type="text" class="form-control" asp-for="ProductDescription"></textarea>
+                        <br />
+
+                        <label>Ürün Bilgilendirmesi</label>
+                        <br />
+                        <textarea type="text" class="form-control" asp-for="ProductInfo"></textarea>
+                        <br />
+
+                        <button class="btn btn-primary">Bilgileri Güncelle ve Kaydet</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+

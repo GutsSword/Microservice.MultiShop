@@ -1,0 +1,45 @@
+﻿@using MultiShop.WebUI.Dtos.CatologDtos.CommentDto
+@model UpdateCommentDto
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-box">
+                <h4>Yorum Güncelle</h4>
+                <p>
+                    Kullanımla ilgili bilgilendirme yapmak için bu alanı kullanın.
+                </p>
+                <br />
+                <div class="bs-example" data-example-id="bordered-table">
+                    <form method="post">
+                        <input type="hidden" asp-for="UserCommentId" class="form-control" />
+                        <input type="hidden" asp-for="NameSurname" class="form-control" />
+                        <input type="hidden" asp-for="CommentDetail" class="form-control" />
+                        <input type="hidden" asp-for="Rating" class="form-control" />
+                        <input type="hidden" asp-for="ProductId" class="form-control" />
+                        <input type="hidden" asp-for="Email" class="form-control" />
+                        <input type="hidden" asp-for="ImageUrl" class="form-control" />
+                        <label>Yorum Gözükme Durumu</label>
+                        <br />
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="Status" id="aktif" value="true" @(Model.Status ? "checked" : "")>
+                            <label class="form-check-label" for="aktif">
+                                Aktif
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="Status" id="pasif" value="false" @(!Model.Status ? "checked" : "")>
+                            <label class="form-check-label" for="pasif">
+                                Pasif
+                            </label>
+                        </div>
+                        <button class="btn btn-success mt-3">Kaydet</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

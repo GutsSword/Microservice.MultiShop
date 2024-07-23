@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MultiShop.WebUI.Dtos.CatologDtos.ProductDetailsDto
 {
-    public class DeleteProductDetail
+    public class UpdateProductDetailDto
     {
         public string ProductDetailId { get; set; }
         public string ProductDescription { get; set; }
@@ -15,6 +15,6 @@ namespace MultiShop.WebUI.Dtos.CatologDtos.ProductDetailsDto
 
         public string ProductId { get; set; }
 
-        public ProductListDto Product { get; set; }
+      //  public ProductListDto? Product { get; set; }
     }
 }

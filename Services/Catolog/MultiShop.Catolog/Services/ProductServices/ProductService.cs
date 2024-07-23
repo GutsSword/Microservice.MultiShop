@@ -13,6 +13,7 @@ namespace MultiShop.Catolog.Services.ProductServices
         private readonly IMongoCollection<Product> productCollection;
         private readonly IMongoCollection<Category> categoryCollection;
         private readonly IMongoCollection<ProductImage> productImageCollection;
+        private readonly IMongoCollection<ProductDetail> productDetailCollection;
         private readonly IDatabaseSettings databaseSettings;
         private readonly IMapper mapper;
 
@@ -23,6 +24,7 @@ namespace MultiShop.Catolog.Services.ProductServices
             productCollection = database.GetCollection<Product>(databaseSettings.ProductCollectionName);
             categoryCollection = database.GetCollection<Category>(databaseSettings.CategoryCollectionName);
             productImageCollection = database.GetCollection<ProductImage>(databaseSettings.ProductImageCollectionName);
+            productDetailCollection = database.GetCollection<ProductDetail>(databaseSettings.ProductDetailCollectionName);
             this.mapper = mapper;
         }
 
@@ -42,6 +44,7 @@ namespace MultiShop.Catolog.Services.ProductServices
             if(createProduct is not null)
                 await productCollection.InsertOneAsync(createProduct);
 
+            // Product Image Tablosunu Oluşturma
             var productImage = new ProductImage
             {
                 ProductId = createProduct.ProductId,
@@ -51,6 +54,16 @@ namespace MultiShop.Catolog.Services.ProductServices
             };
 
             await productImageCollection.InsertOneAsync(productImage);
+
+            // Product Detail Tablosunu Oluşturma
+            var productDetail = new ProductDetail
+            {
+                ProductId = createProduct.ProductId, 
+                ProductDescription = "Herhangi bir açıklama bulunmamaktadır.",
+                ProductInfo = "Herhangi bir bilgilendirme bulunmamaktadır.",
+            };
+
+            await productDetailCollection.InsertOneAsync(productDetail);
         }
 
         public async Task DeleteProductAsync(string id)

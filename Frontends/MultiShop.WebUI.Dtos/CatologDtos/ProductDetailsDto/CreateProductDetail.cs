@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MultiShop.WebUI.Dtos.CatologDtos.ProductDtos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,12 @@ namespace MultiShop.WebUI.Dtos.CatologDtos.ProductDetailsDto
 {
     public class CreateProductDetail
     {
+        public string ProductDetailId { get; set; }
+        public string ProductDescription { get; set; }
+        public string ProductInfo { get; set; }
+
+        public string ProductId { get; set; }
+
+        public ProductListDto Product { get; set; }
     }
 }

@@ -4,4 +4,5 @@ Discount Service = 7071
 Order Service = 7072
 Cargo Service = 7073
 Basket Service = 7074
+Comment Service = 7075
 WebUI Service = 7028
