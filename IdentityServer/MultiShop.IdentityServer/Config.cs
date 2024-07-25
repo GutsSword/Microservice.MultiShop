@@ -34,6 +34,10 @@ namespace MultiShop.IdentityServer
            {
                Scopes = {"BasketFullPermission"}
            },
+           new ApiResource("ResourceComment")
+           {
+               Scopes = {"CommentFullPermission"}
+           },
            new ApiResource(IdentityServerConstants.LocalApi.ScopeName) 
         };
 
@@ -52,6 +56,7 @@ namespace MultiShop.IdentityServer
             new ApiScope("OrderFullPermission","Full Authority for Discount Operations"),
             new ApiScope("CargoFullPermission","Full Authority for Cargo Operations"),
             new ApiScope("BasketFullPermission","Full Authority for Basket Operations"),
+            new ApiScope("CommentFullPermission","Full Authority for Comment Operations"),
             new ApiScope(IdentityServerConstants.LocalApi.ScopeName),
         };
 
@@ -66,7 +71,17 @@ namespace MultiShop.IdentityServer
                 ClientName = "MultiShop Visitor User",
                 AllowedGrantTypes = GrantTypes.ClientCredentials,
                 ClientSecrets = {new Secret("multishopsecret".Sha256())},
-                AllowedScopes = { "CatologReadPermission" }
+                AllowedScopes = 
+                {
+                    "CatologReadPermission",
+                    "CatologFullPermission",
+                    "CatologReadPermission",
+                    "DiscoundFullPermission",
+                    "OrderFullPermission",
+                    "CargoFullPermission",
+                    "BasketFullPermission",
+                    "CommentFullPermission",
+                }
             },
             // Manager Role
             new Client
@@ -91,8 +106,8 @@ namespace MultiShop.IdentityServer
                     "OrderFullPermission",
                     "CargoFullPermission",
                     "BasketFullPermission",
+                    "CommentFullPermission",
                     IdentityServerConstants.LocalApi.ScopeName,
-                    IdentityServerConstants.StandardScopes.Email,
                     IdentityServerConstants.StandardScopes.Email,
                     IdentityServerConstants.StandardScopes.Profile,
                 },

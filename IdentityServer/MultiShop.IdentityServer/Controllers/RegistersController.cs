@@ -10,7 +10,8 @@ using static IdentityServer4.IdentityServerConstants;
 
 namespace MultiShop.IdentityServer.Controllers
 {
-    [Authorize(LocalApi.PolicyName)]
+    [AllowAnonymous]
+    //[Authorize(LocalApi.PolicyName)]
     [Route("api/[controller]")]
     [ApiController]
     public class RegistersController : ControllerBase
@@ -39,5 +40,6 @@ namespace MultiShop.IdentityServer.Controllers
             else
                 return BadRequest("Hata oluştu.");
         }
+
     }
 }
